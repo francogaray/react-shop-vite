@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "../../components/Card";
+import ProductDetail from "../../components/ProductDetail";
 
 const Home = () => {
 
@@ -11,12 +12,12 @@ const Home = () => {
         .then(data => setItem(data))
     },[] )
 
-    return <div className="grid gap-4 grid-cols-4 w-full max-w-screen-xl grid bg-green-400">
+    return <div className="grid gap-4 grid-cols-4 w-full max-w-screen-xl bg-green-400">
         {item?.map( (item) => (
             <Card data={item} key={item.id} />
-        ))
-
+            ))
         }
+        <ProductDetail/>
     </div>;
 };
 

@@ -1,6 +1,19 @@
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { ShoppingCartContext } from "../../Context";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+
 
 const Navbar = () => {
+    const context = useContext(ShoppingCartContext)
+    const logoCart = () => {
+            return (
+            <div className="flex flex-row items-center">
+                            <ShoppingCartIcon className="h-5 w-5 text-black"></ShoppingCartIcon>
+                            {context.count}
+            </div>
+            )
+        }
     const leftMenu = [
         {
             name: "Shoppi",
@@ -21,7 +34,7 @@ const Navbar = () => {
         { name: "My orders", to: "/my-orders", className: "" },
         { name: "My account", to: "/my-accoount", className: "" },
         { name: "Sign in", to: "/sign-in", className: "" },
-        { name: "🛒 0", logo:true },
+        { name: logoCart, logo:true },
     ];
 
     const activeStyle = "underline underline-offset-4";
@@ -61,3 +74,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
