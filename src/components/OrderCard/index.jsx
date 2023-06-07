@@ -1,11 +1,8 @@
-import { useContext } from "react"
-import { ShoppingCartContext } from "../../Context"
 import { XMarkIcon } from "@heroicons/react/24/solid"
 
 const OrderCart = props => {
 
-    const { title, imageUrl, price } = props
-    const context = useContext(ShoppingCartContext)
+    const { id, title, imageUrl, price, handleDelete } = props
 
     return(
         <div className=" flex justify-between items-center mb-2">
@@ -16,8 +13,9 @@ const OrderCart = props => {
                 <p className="text-sm font-light"></p>
             </div>
             <div className="flex items-center gap-2">
+                <p className=" text-lg font-light">{title}</p>
                 <p className=" text-lg font-medium">${price}</p>
-                <div className='cursor-pointer' onClick={() => context.closeCheckoutSide()}>
+                <div className='cursor-pointer' onClick={() => handleDelete(id)}>
                     <XMarkIcon className="w-6 h-6 text-black "></XMarkIcon>
                 </div>
             </div>
