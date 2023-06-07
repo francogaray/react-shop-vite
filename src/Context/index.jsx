@@ -8,7 +8,7 @@ export const ShoppingCartProvider = ({ children }) => {
         children: PropTypes.node.isRequired,
     };
 
-    //Shoppoing Cart Increment quantity
+    //Shoppoing Cart Icon · Increment quantity
     const [count, setCount] = useState(0);
 
     //Checkout side Open/Close
@@ -29,9 +29,15 @@ export const ShoppingCartProvider = ({ children }) => {
         setIsProductDetailOpen(false);
     };
 
-    //Product Detail Show products
+    //Product Detail · Show products
     const [productToShow, setProductToShow] = useState({})
+
+    //Shopping Cart · Add product to cart
     const [cartProducts, setCartProducts] = useState([])
+
+    //Shopping Cart · Order
+    const [order, setOrder] = useState([])
+
 
     return (
         <ShoppingCartContext.Provider
@@ -49,6 +55,8 @@ export const ShoppingCartProvider = ({ children }) => {
                 setIsCheckoutSideOpen,
                 openCheckoutSide,
                 closeCheckoutSide,
+                order,
+                setOrder
             }}
         >
             {children}

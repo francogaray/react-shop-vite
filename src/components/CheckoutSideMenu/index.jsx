@@ -4,6 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context";
 import OrderCart from "../OrderCard";
 import { totalPrice } from "../utils";
+import { Link } from "react-router-dom";
 
 const CheckoutSideMenu = () => {
 
@@ -14,6 +15,18 @@ const CheckoutSideMenu = () => {
     const handleDelete = (id) => {
         const filteredProducts = products.filter(product => product.id != id)
         context.setCartProducts(filteredProducts)
+    }
+
+    const handleCheckout = () => {
+        const orderToAdd = {
+            date:'01-01-2023',
+            products: products,
+            totalProducts: products.length,
+            totalPrice: totalPrice(products)
+        }
+        context.setOrder([...context.order, orderToAdd])
+        context.setCartProducts([])
+        console.log("order created")
     }
 
     return (
@@ -28,7 +41,7 @@ const CheckoutSideMenu = () => {
                     <XMarkIcon className="w-6 h-6 text-black "></XMarkIcon>
                 </div>
             </div>
-            <div className="px-6 overflow-y-scroll">
+            <div className="px-6 overflow-y-scroll flex-1">
             {
                 products.map( (product) => (
                     <OrderCart
@@ -43,13 +56,20 @@ const CheckoutSideMenu = () => {
                 }
             </div>
             <div className="px-6">
-                <p className="flex justify-between items-center text-lg mx-2"  >
+                <p className="flex justify-between items-center text-lg m-2 "  >
                     <span> Total:</span>
                     <span className="font-medium text-2xl">${totalPrice(products)}</span>
                 </p>
+                <Link to='/my-orders/last'>
+                    <button className="w-full bg-black py-3 text-white rounded-md mb-6"
+                    onClick={()=> handleCheckout()}>
+                        CheckOut
+                    </button>
+                </Link>
             </div>
         </aside>
     );
 };
 
 export default CheckoutSideMenu;
+ 
