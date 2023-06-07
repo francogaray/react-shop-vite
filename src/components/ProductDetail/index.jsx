@@ -6,7 +6,6 @@ import { ShoppingCartContext } from "../../Context";
 const ProductDetail = () => {
     const context = useContext(ShoppingCartContext);
     const product = context.productToShow;
-    console.log(product);
 
     return (
         <aside
@@ -16,30 +15,22 @@ const ProductDetail = () => {
         >
             <div className="flex justify-between items-center p-6">
                 <h2 className="font-medium text-xl">Detail</h2>
-                <div
-                    className="cursor-pointer"
-                    onClick={() => context.closeProductDetail()}
-                >
+                <div className='cursor-pointer' onClick={() => context.closeProductDetail()}>
                     <XMarkIcon className="w-6 h-6 text-black "></XMarkIcon>
                 </div>
             </div>
             <figure className="px-6">
                 <img
                     className="w-full h-full rounded-lg"
-                    src={product.images[0]}
+                    src={product.images?.[0]}
                     alt={product.title}
                 />
             </figure>
             <p className="flex flex-col p-6">
-                <span className="font-medium text-2xl mb-2">
-                    ${product.price}
-                </span>
-                <span className="font-medium text-md mb-1">
-                    {product.title}
-                </span>
-                <span className="font-light text-sm">
-                    {product.description}
-                </span>
+                <span className='font-medium text-2xl mb-2' >${product.price}</span>
+                <span className='font-medium text-md mb-1'>{product.title}</span>
+                <span className='font-light text-sm'>{product.description}</span>
+
             </p>
         </aside>
     );
