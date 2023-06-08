@@ -1,28 +1,35 @@
-import OrderCart from "../../components/OrderCard"
 import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { ChevronLeftIcon } from "@heroicons/react/24/solid";
 import { ShoppingCartContext } from "../../Context";
+import OrderCart from "../../components/OrderCard";
 
 function MyOrder() {
+    const context = useContext(ShoppingCartContext);
+    const currentPath = window.location.pathname;
+    const index = currentPath.substring(currentPath.lastIndexOf('/')+1)
 
-  const context = useContext(ShoppingCartContext);
 
     return (
-        <div className='bg-green-400'>
-          MyOrder
-          <div className="px-6 flex flex-col w-96">
-            {
-                context.order?.slice(-1)[0].products.map( product => (
-                    <OrderCart
-                    key={product.id}
-                    id={product.id}
-                    title={product.title}
-                    imageUrl= {product.images?.[0]}
-                    price= {product.price}
-                    />
-                ))
-                }
+        <>
+            <div className="flex justify-center items-center w-80 relative mb-6">
+                <Link to="/my-orders" className="absolute left-0">
+                    <ChevronLeftIcon className="w-6 h-6" />
+                </Link>
+                <h1>My order</h1>
             </div>
-        </div>
-    )
-  }
-  export default MyOrder
+            <div className="flex flex-col w-80">
+                {context.order?.[index]?.products.map((product) => (
+                    <OrderCart
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        imageUrl={product.images?.[0]}
+                        price={product.price}
+                    />
+                ))}
+            </div>
+        </>
+    );
+}
+export default MyOrder;
