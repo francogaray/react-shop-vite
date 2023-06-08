@@ -7,7 +7,8 @@ import OrderCart from "../../components/OrderCard";
 function MyOrder() {
     const context = useContext(ShoppingCartContext);
     const currentPath = window.location.pathname;
-    const index = currentPath.substring(currentPath.lastIndexOf('/')+1)
+    let index = currentPath.substring(currentPath.lastIndexOf('/')+1)
+    if (index === 'last' ) index = context.order?.length-1
 
 
     return (

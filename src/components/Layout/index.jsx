@@ -4,6 +4,6 @@ const Layout = ({ children }) => {
     Layout.propTypes = {
         children: PropTypes.node.isRequired,
     };
-    return <div className=" flex flex-col items-center bg-green-950">{children}</div>;
+    return <div className=" flex flex-col items-center">{children}</div>;
 };
 export default Layout;
