@@ -9,7 +9,7 @@ const OrdersCart = props => {
     return(
         <div className=" flex justify-between items-center mb-3 border border-black p-4 w-80 rounded-lg">
             <div className="flex justify-between items-center w-full">
-                <p className="flex flex-col">
+                <div className="flex flex-col">
                     <p className="flex gap-2 mb-2">
                         <CalendarDaysIcon className="h-6 w-6 cursor-pointer text-black"></CalendarDaysIcon>
                         <span>01.02.2023</span>
@@ -18,7 +18,7 @@ const OrdersCart = props => {
                         <ClipboardDocumentCheckIcon className="h-6 w-6 cursor-pointer text-black"></ClipboardDocumentCheckIcon>
                         <span>{totalProducts} articles</span>
                     </p>
-                </p>
+                </div>
                 <p className="flex items-center gap-2">
                     <span className="font-medium text-xl">${totalPrice}</span>
                     <ChevronRightIcon className="h-6 w-6 cursor-pointer text-black"></ChevronRightIcon>
