@@ -6,7 +6,6 @@ import { ShoppingCartContext } from "../../Context";
 
 function MyOrders() {
     const context = useContext(ShoppingCartContext);
-    console.log(context.order)
     return (
     <>
             <div className='flex justify-center items-center w-80 relative mb-4 '>

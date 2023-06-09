@@ -24,8 +24,8 @@ const Navbar = () => {
         { name: "All", to: "/", className: "" },
         { name: "Clothes", to: "/clothes", className: "" },
         { name: "Electronics", to: "/electronics", className: "" },
-        { name: "Fornitures", to: "/fornitures", className: "" },
-        { name: "Toys", to: "/toys", className: "" },
+        { name: "Furnitures", to: "/furniture", className: "" },
+        { name: "Shoes", to: "/shoes", className: "" },
         { name: "Others", to: "/others", className: "" },
     ];
 
@@ -45,6 +45,7 @@ const Navbar = () => {
                 {leftMenu.map((item) => (
                     <li key={item.name} className={item.className}>
                         <NavLink
+                            onClick={()=> context.setSearchByCategory(item.to.slice(1))}
                             className={({ isActive }) =>
                                 isActive && !item.logo ? activeStyle : ""
                             }
