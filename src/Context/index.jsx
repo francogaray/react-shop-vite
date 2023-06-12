@@ -3,10 +3,38 @@ import PropTypes from "prop-types";
 
 export const ShoppingCartContext = createContext();
 
+export const InitializeLocalStorage = () => {
+    const accountInLocalStorage = localStorage.getItem('account')
+    const signOuntInLocalStorage = localStorage.getItem('sign-out')
+
+    let parsedAccount
+    let parsedSignOut
+
+    if (!accountInLocalStorage){
+        localStorage.setItem('account', JSON.stringify({}))
+        parsedAccount = {}
+    }else{
+        parsedAccount = JSON.parse(accountInLocalStorage)
+    }
+
+    if (!signOuntInLocalStorage){
+        localStorage.setItem('sign-out', JSON.stringify(false) )
+    }else{
+        parsedSignOut = JSON.parse(signOuntInLocalStorage)
+    }
+}
+
 export const ShoppingCartProvider = ({ children }) => {
     ShoppingCartProvider.propTypes = {
         children: PropTypes.node.isRequired,
     };
+
+    //My account
+    const [account, setAccount] = useState({})
+
+    //Sign out
+    const [signOut, setSignOut] = useState(false)
+
 
     //Shoppoing Cart Icon · Increment quantity
     const [count, setCount] = useState(0);
@@ -111,6 +139,10 @@ export const ShoppingCartProvider = ({ children }) => {
                 filteredItems,
                 searchByCategory,
                 setSearchByCategory,
+                account,
+                setAccount,
+                signOut,
+                setSignOut,
 
             }}
         >
