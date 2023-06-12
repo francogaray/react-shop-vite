@@ -61,7 +61,7 @@ const Navbar = () => {
         },
         {
             name: "My account",
-            to: "/my-accoount",
+            to: "/my-account",
             className: "",
             logOut: isUserSignOut,
         },

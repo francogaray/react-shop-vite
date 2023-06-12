@@ -39,7 +39,7 @@ const Card = (data) => {
     };
 
     return (
-        <div className="bg-slate-500 cursor-pointer w-56 h-60 rounded-lg m-auto">
+        <div className="bg-slate-500 cursor-pointer w-56 h-80 rounded-lg m-auto">
             <figure className=" relative mb-2 w-full h-4/5 ">
                 <span className="absolute left-2 bottom-0 bg-lime-500/60 text-black text-xs m-2 rounded-lg px-3 py-0.5">
                     {data.data.category.name}
@@ -53,7 +53,7 @@ const Card = (data) => {
                 {renderIcon(data.data.id)}
             </figure>
             <p
-                className="flex justify-between px-2"
+                className="flex flex-1 items-center h-10  justify-between px-2"
                 onClick={() => showProduct(data.data)}
             >
                 <span className="text-sm font-light">{data.data.title}</span>
