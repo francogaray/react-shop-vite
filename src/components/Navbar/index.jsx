@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { ShoppingCartContext } from "../../Context";
-import { ShoppingCartIcon } from "@heroicons/react/24/outline";
+import ShoppingCart from "../ShoppingCart";
 
 const Navbar = () => {
     const context = useContext(ShoppingCartContext);
@@ -11,6 +11,19 @@ const Navbar = () => {
     const parsedSignOut = JSON.parse(signOut);
     const isUserSignOut = context.signOut || parsedSignOut;
 
+    // Account
+    const account = localStorage.getItem("account");
+    const parsedAccount = JSON.parse(account);
+
+    // Has account
+    const noAccountInLocalStorage = parsedAccount
+        ? Object.keys(parsedAccount).length === 0
+        : true;
+    const noAccountInLocalState = context.account
+        ? Object.keys(context.account).length === 0
+        : true;
+    const hasUserAccount = !noAccountInLocalStorage || !noAccountInLocalState;
+
     const handleSignOut = () => {
         const strigifiedSignOut = JSON.stringify(true);
         localStorage.setItem("sign-out", strigifiedSignOut);
@@ -19,7 +32,7 @@ const Navbar = () => {
     const leftMenu = [
         {
             name: "Shoppi",
-            to: "/",
+            to: isUserSignOut ? '/sign-in' : '/',
             className: "font-semibold text-lg",
             logo: true,
         },
@@ -31,9 +44,11 @@ const Navbar = () => {
         { name: "Others", to: "/others", className: "" },
     ];
 
+    // const validationPath = hasUserAccount && !isUserSignOut ? <Home /> : <Navigate replace to={/sign-in/} />
+
     const rightMenu = [
         {
-            name: "dev@dev.com",
+            name: parsedAccount?.email,
             className: "text-black/60",
             logo: true,
             logOut: isUserSignOut,
@@ -63,7 +78,7 @@ const Navbar = () => {
         return (
             <>
                 {rightMenu.map((item) =>
-                    item.logOut ? (
+                    (
                         <li key={item.name}>
                             <NavLink
                                 className={({ isActive }) =>
@@ -77,9 +92,7 @@ const Navbar = () => {
                                 {item.name}
                             </NavLink>
                         </li>
-                    ) : (
-                        <></>
-                    )
+                    ) 
                 )}
             </>
         );
@@ -107,7 +120,7 @@ const Navbar = () => {
                 ))}
             </ul>
             <ul className="flex items-center gap-3 ">
-                {isUserSignOut ? (
+                { hasUserAccount && !isUserSignOut ? (
                     renderView()
                 ) : (
                     <li>
@@ -118,16 +131,11 @@ const Navbar = () => {
                             }
                             onClick={() => handleSignOut()}
                         >
-                            Sign out
+                            Sign in
                         </NavLink>
                     </li>
                 )}
-                <li>
-                    <div className="flex flex-row items-center">
-                        <ShoppingCartIcon className="h-5 w-5 text-black"></ShoppingCartIcon>
-                        {context.count}
-                    </div>
-                </li>
+                <ShoppingCart/>
             </ul>
         </nav>
     );
